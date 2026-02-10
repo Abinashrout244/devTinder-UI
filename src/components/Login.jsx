@@ -5,6 +5,7 @@ import { useDispatch } from "react-redux";
 import { addUser } from "../utils/userSlice";
 import { useNavigate } from "react-router-dom";
 import { BASE_URL } from "../utils/Constants";
+import toast from "react-hot-toast";
 
 const Login = () => {
   const [emailId, setEmailId] = useState("sinu.mail@gmail.com");
@@ -27,6 +28,7 @@ const Login = () => {
 
       dispatch(addUser(res.data.isEmail));
       //console.log(res);
+      toast.success("Logedin Sucessfully!!");
       navigate("/");
     } catch (err) {
       console.log(err);

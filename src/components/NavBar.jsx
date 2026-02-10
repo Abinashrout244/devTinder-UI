@@ -1,5 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import { removeUser } from "../utils/userSlice";
+import { Link } from "react-router-dom";
 
 const NavBar = () => {
   const dispatch = useDispatch();
@@ -8,14 +9,14 @@ const NavBar = () => {
     console.log("logout sucessfully.");
   };
   const user = useSelector((state) => state.user);
-  console.log(user);
+  //console.log(user);
 
   return (
     <div className="navbar bg-base-300 shadow-sm">
       <div className="flex-1">
-        <button className=" bg-base-300 text-xl font-semibold">
+        <Link to="/" className=" bg-base-300 text-xl font-semibold">
           👤DevTinder
-        </button>
+        </Link>
       </div>
       <div className="flex gap-2 items-center">
         <div className="dropdown dropdown-end ">
@@ -51,7 +52,7 @@ const NavBar = () => {
               <a>Settings</a>
             </li>
             <li className="hover:bg-black/20 rounded-md font-semibold">
-              <a>Profile</a>
+              <Link to="/profile">Profile</Link>
             </li>
             <li
               onClick={handleLogout}
