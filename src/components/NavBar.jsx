@@ -1,18 +1,34 @@
 import { useDispatch, useSelector } from "react-redux";
 import { removeUser } from "../utils/userSlice";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
+import { BASE_URL } from "../utils/Constants";
+import toast from "react-hot-toast";
 
 const NavBar = () => {
   const dispatch = useDispatch();
-  const handleLogout = () => {
-    dispatch(removeUser());
-    console.log("logout sucessfully.");
+  const navigate = useNavigate();
+  const handleLogout = async () => {
+    try {
+      await axios.post(
+        `${BASE_URL}/logout`,
+        {},
+        {
+          withCredentials: true,
+        },
+      );
+      dispatch(removeUser());
+      toast.success("Logout sucessfully.");
+      return navigate("/login");
+    } catch (err) {
+      console.log(err.response);
+    }
   };
   const user = useSelector((state) => state.user);
   //console.log(user);
 
   return (
-    <div className="navbar bg-base-300 shadow-sm">
+    <div className="navbar bg-base-300 shadow-sm ">
       <div className="flex-1">
         <Link to="/" className=" bg-base-300 text-xl font-semibold">
           👤DevTinder
