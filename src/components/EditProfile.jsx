@@ -1,5 +1,9 @@
 import React, { useState } from "react";
 import FeedCard from "./FeedCard";
+import axios from "axios";
+import { BASE_URL } from "../utils/Constants";
+import { useDispatch } from "react-redux";
+import { addUser } from "../utils/userSlice";
 
 const EditProfile = ({ user }) => {
   const [firstName, setFirstName] = useState(user.firstName);
@@ -8,6 +12,25 @@ const EditProfile = ({ user }) => {
   const [gender, setGender] = useState(user.gender);
   const [about, setAbout] = useState(user.about);
   const [photoURL, setPhotoURL] = useState(user.photoURL);
+  const [err, setErr] = useState("");
+
+  const dispatch = useDispatch();
+
+  const hanldeEdit = async () => {
+    try {
+      const data = await axios.patch(
+        `${BASE_URL}/profile/edit`,
+        { firstName, lastName, age, gender, photoURL, about },
+        { withCredentials: true },
+      );
+      console.log(data);
+
+      //dispatch(addUser(data));
+    } catch (err) {
+      console.log(err);
+      setErr(err.response);
+    }
+  };
 
   return (
     <div className="card bg-base-300 w-full max-w-5xl mx-auto p-6 ">
@@ -55,7 +78,6 @@ const EditProfile = ({ user }) => {
 
               <select
                 className="select w-full "
-                defaultValue={"Select a Gender"}
                 value={gender}
                 onChange={(e) => setGender(e.target.value)}
               >
@@ -86,9 +108,13 @@ const EditProfile = ({ user }) => {
                 onChange={(e) => setAbout(e.target.value)}
               ></textarea>
             </label>
+            <p className="text-red-600 font-semibold">{err}</p>
 
             <div className="flex justify-center pt-4">
-              <button className="btn btn-primary w-full sm:w-auto">
+              <button
+                onClick={hanldeEdit}
+                className="btn btn-primary w-full sm:w-auto"
+              >
                 Save Profile
               </button>
             </div>

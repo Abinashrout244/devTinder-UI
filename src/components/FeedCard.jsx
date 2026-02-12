@@ -5,15 +5,15 @@ const FeedCard = ({ user }) => {
   //console.log(user);
 
   return (
-    <div className="card bg-slate-800 h-full w-80">
-      <div className="">
+    <div className="card bg-slate-800 h-full w-72 rounded-2xl">
+      <div className="h-full">
         <img
           src={
             photoURL ||
             "https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
           }
           alt="ProfilePhoto"
-          className="rounded-t-md w-full h-48"
+          className="rounded-t-2xl w-full h-64"
         />
       </div>
       <div className="card-body">
@@ -21,7 +21,7 @@ const FeedCard = ({ user }) => {
           {firstName || "Not Found"}
         </h2>
         {age && gender && (
-          <div className="flex flex-col gap-4">
+          <div className="flex flex-col gap-2">
             <p>
               Age:<span className="font-semibold">{age}</span>
             </p>{" "}

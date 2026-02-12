@@ -29,11 +29,16 @@ const Feed = () => {
   const data = User_Info?.users;
 
   return (
+    // data && (
+    //   <div className="p-10 flex gap-5 flex-wrap justify-center items-center">
+    //     {data?.map((user, index) => {
+    //       return <FeedCard user={user} key={user?._id} />;
+    //     })}
+    //   </div>
+    // )
     data && (
       <div className="p-10 flex gap-5 flex-wrap justify-center items-center">
-        {data?.map((user, index) => {
-          return <FeedCard user={user} key={user?._id} />;
-        })}
+        <FeedCard user={data[0]} />
       </div>
     )
   );
