@@ -26,10 +26,14 @@ const Connections = () => {
   }, []);
   if (!connection_data) return;
   if (connection_data.length === 0)
-    return <h1 className="font-semibold text-lg">No Connections Found!!</h1>;
+    return (
+      <h1 className="font-semibold text-lg min-h-screen flex justify-center items-center">
+        No Connections Found!!
+      </h1>
+    );
   return (
     connection_data && (
-      <div className="px-4 sm:px-6 flex flex-col  gap-4 justify-center pt-12">
+      <div className="px-4 sm:px-6 flex flex-col pb-40  gap-4 justify-center pt-12">
         <h2 className="text-center font-semibold text-lg shadow-sm ">
           My Connections
         </h2>
