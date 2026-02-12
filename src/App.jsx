@@ -7,6 +7,8 @@ import appStore from "./utils/appStore";
 import Signup from "./components/Signup";
 import Profile from "./components/Profile";
 import Error from "./utils/Error";
+import Connections from "./components/Connections";
+import ConnectionRequests from "./components/ConnectionRequests";
 import { Toaster } from "react-hot-toast";
 
 function App() {
@@ -21,6 +23,8 @@ function App() {
               <Route path="/login" element={<Login />} />
               <Route path="/signup" element={<Signup />} />
               <Route path="/profile" element={<Profile />} />
+              <Route path="/connections" element={<Connections />} />
+              <Route path="/requests" element={<ConnectionRequests />} />
             </Route>
             <Route path="*" element={<Error />} />
           </Routes>

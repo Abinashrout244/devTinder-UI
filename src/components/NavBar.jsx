@@ -65,10 +65,13 @@ const NavBar = () => {
             tabIndex="-1"
           >
             <li className="hover:bg-black/20 rounded-md font-semibold">
-              <a>Settings</a>
+              <Link to="/profile">Profile</Link>
             </li>
             <li className="hover:bg-black/20 rounded-md font-semibold">
-              <Link to="/profile">Profile</Link>
+              <Link to="/connections">Connections</Link>
+            </li>
+            <li className="hover:bg-black/20 rounded-md font-semibold">
+              <Link to="/requests">Pending Request</Link>
             </li>
             <li
               onClick={handleLogout}
