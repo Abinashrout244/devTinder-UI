@@ -19,7 +19,7 @@ const NavBar = () => {
       );
       dispatch(removeUser());
       toast.success("Logout sucessfully.");
-      return navigate("/login");
+      return navigate("/profile");
     } catch (err) {
       console.log(err.response);
     }
@@ -72,6 +72,9 @@ const NavBar = () => {
             </li>
             <li className="hover:bg-black/20 rounded-md font-semibold">
               <Link to="/requests">Pending Request</Link>
+            </li>
+            <li className="hover:bg-black/20 rounded-md font-semibold">
+              <Link to="/changepassword">Change Password</Link>
             </li>
             <li
               onClick={handleLogout}

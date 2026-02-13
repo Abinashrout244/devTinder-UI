@@ -3,13 +3,13 @@ import React from "react";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { addUser } from "../utils/userSlice";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { BASE_URL } from "../utils/Constants";
 import toast from "react-hot-toast";
 
 const Login = () => {
-  const [emailId, setEmailId] = useState("sinu.mail@gmail.com");
-  const [password, setPassword] = useState("Sinu@1234_");
+  const [emailId, setEmailId] = useState("");
+  const [password, setPassword] = useState("");
   const [err, setErr] = useState("");
 
   const dispatch = useDispatch();
@@ -29,7 +29,7 @@ const Login = () => {
 
       dispatch(addUser(res.data.isEmail));
       //console.log(res);
-      toast.success("Logedin Sucessfully!!");
+      toast.success("Password Change Sucessfully!!");
       navigate("/");
     } catch (err) {
       setErr(err.response.data);
@@ -83,7 +83,7 @@ const Login = () => {
           </div>
           <p className="text-red-500 font-semibold self-start">{err}</p>
           <p className="link link-hover text-gray-200 self-end">
-            Forgot Password?
+            <Link to="/changepassword"> Forgot Password?</Link>
           </p>
 
           <button
