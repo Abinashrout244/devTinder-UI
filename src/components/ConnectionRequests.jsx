@@ -34,14 +34,21 @@ const ConnectionRequests = () => {
   }, []);
 
   const request_data = useSelector((state) => state.request);
-  console.log(request_data);
+  //console.log(request_data);
 
   if (!request_data) return;
   if (request_data.length === 0) {
     return (
-      <h1 className="font-semibold text-lg min-h-screen flex justify-center items-center">
-        No Pending Requests Found!!
-      </h1>
+      <div className="min-h-screen flex flex-col justify-center items-center text-center px-4">
+        <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold bg-linear-to-r from-primary to-secondary bg-clip-text text-transparent animate-pulse">
+          No Pending Requests Found!!
+        </h1>
+
+        <p className="mt-4 text-sm sm:text-base text-gray-400 max-w-md">
+          Looks like everything is up to date. When someone sends you a request,
+          it will appear here.
+        </p>
+      </div>
     );
   }
 

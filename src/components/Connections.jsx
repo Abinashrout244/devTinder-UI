@@ -6,7 +6,7 @@ import { addConnections } from "../utils/connectionSlice";
 
 const Connections = () => {
   const connection_data = useSelector((state) => state.connection);
-  console.log(connection_data);
+  //console.log(connection_data);
   const dispatch = useDispatch();
 
   const fetc_Connections = async () => {
@@ -27,9 +27,18 @@ const Connections = () => {
   if (!connection_data) return;
   if (connection_data.length === 0)
     return (
-      <h1 className="font-semibold text-lg min-h-screen flex justify-center items-center">
-        No Connections Found!!
-      </h1>
+      <div className="min-h-screen flex items-center justify-center px-4">
+        <div className="bg-base-200 shadow-xl rounded-2xl p-8 text-center max-w-md w-full border border-base-300">
+          <h1 className="text-2xl sm:text-3xl font-bold bg-linear-to-r from-primary to-secondary bg-clip-text text-transparent">
+            No Connection Requests
+          </h1>
+
+          <p className="mt-4 text-sm sm:text-base text-gray-400">
+            You don’t have any pending connection requests right now. When
+            someone sends you one, it will appear here.
+          </p>
+        </div>
+      </div>
     );
   return (
     connection_data && (

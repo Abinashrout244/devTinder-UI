@@ -4,31 +4,36 @@ import axios from "axios";
 import { BASE_URL } from "../utils/Constants";
 import { useDispatch } from "react-redux";
 import { addUser } from "../utils/userSlice";
+import toast from "react-hot-toast";
 
 const EditProfile = ({ user }) => {
   const [firstName, setFirstName] = useState(user.firstName);
   const [lastName, setLastName] = useState(user.lastName);
-  const [age, setAge] = useState(user.age);
-  const [gender, setGender] = useState(user.gender);
+  const [age, setAge] = useState(user.age || "");
+  const [gender, setGender] = useState(user.gender || "Select a Gender");
   const [about, setAbout] = useState(user.about);
-  const [photoURL, setPhotoURL] = useState(user.photoURL);
+  const [photoURL, setPhotoURL] = useState(
+    user.photoURL ||
+      "https://tse4.mm.bing.net/th/id/OIP.Yh_Zd0cdrtxGpEjqC0tq6QHaHa?pid=Api&P=0&h=180",
+  );
   const [err, setErr] = useState("");
 
   const dispatch = useDispatch();
 
   const hanldeEdit = async () => {
     try {
-      const data = await axios.patch(
+      setErr("");
+      const res = await axios.put(
         `${BASE_URL}/profile/edit`,
         { firstName, lastName, age, gender, photoURL, about },
         { withCredentials: true },
       );
-      console.log(data);
-
-      //dispatch(addUser(data));
+      dispatch(addUser(res?.data?.data));
+      toast.success("Profile Update Sucessfully!!");
+      console.log(res?.data?.data);
     } catch (err) {
-      console.log(err);
-      setErr(err.response);
+      console.log(err.reponse);
+      setErr(err.response.data);
     }
   };
 

@@ -4,6 +4,7 @@ import { BASE_URL } from "../utils/Constants";
 import axios from "axios";
 import { addFeed } from "../utils/feedSlice";
 import FeedCard from "./FeedCard";
+import { AnimatePresence } from "framer-motion";
 
 const Feed = () => {
   const dispatch = useDispatch();
@@ -25,18 +26,29 @@ const Feed = () => {
   }, []);
   const data = useSelector((data) => data.Feed);
 
+  // return (
+  //   data && (
+  //     <div className="p-10 flex gap-5 flex-wrap justify-center items-center">
+  //       {data?.length > 0 ? (
+  //         <FeedCard user={data[0]} />
+  //       ) : (
+  //         <p className="pt-40 flex justify-center items-center text-3xl font-semibold">
+  //           No more users
+  //         </p>
+  //       )}
+  //     </div>
+  //   )
+  // );
   return (
-    data && (
-      <div className="p-10 flex gap-5 flex-wrap justify-center items-center">
-        {data?.length > 0 ? (
-          <FeedCard user={data[0]} />
-        ) : (
-          <p className="pt-40 flex justify-center items-center text-3xl font-semibold">
-            No more users
-          </p>
-        )}
-      </div>
-    )
+    <div className="p-10 flex gap-5 flex-wrap justify-center items-center relative">
+      {data?.length > 0 ? (
+        <AnimatePresence mode="wait">
+          <FeedCard key={data[0]._id} user={data[0]} />
+        </AnimatePresence>
+      ) : (
+        <p className="pt-40 text-3xl font-semibold">No more users</p>
+      )}
+    </div>
   );
 };
 

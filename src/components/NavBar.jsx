@@ -19,7 +19,7 @@ const NavBar = () => {
       );
       dispatch(removeUser());
       toast.success("Logout sucessfully.");
-      return navigate("/profile");
+      return navigate("/login");
     } catch (err) {
       console.log(err.response);
     }
