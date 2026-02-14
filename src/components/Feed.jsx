@@ -5,6 +5,7 @@ import axios from "axios";
 import { addFeed } from "../utils/feedSlice";
 import FeedCard from "./FeedCard";
 import { AnimatePresence } from "framer-motion";
+import spinner from "../assets/spinner.gif";
 
 const Feed = () => {
   const dispatch = useDispatch();
@@ -25,6 +26,12 @@ const Feed = () => {
     handleFeed();
   }, []);
   const data = useSelector((data) => data.Feed);
+  if (!data)
+    return (
+      <h1 className="h-screen flex justify-center items-center">
+        <img src={spinner} className="size-16" />
+      </h1>
+    );
 
   // return (
   //   data && (
@@ -40,10 +47,10 @@ const Feed = () => {
   //   )
   // );
   return (
-    <div className="p-10 flex gap-5 flex-wrap justify-center items-center relative">
+    <div className="p-10 flex gap-5 flex-wrap justify-center items-center   min-h-screen">
       {data?.length > 0 ? (
         <AnimatePresence mode="wait">
-          <FeedCard key={data[0]._id} user={data[0]} />
+          <FeedCard key={data[0]._id} user={data[0]} enableSwipe={true} />
         </AnimatePresence>
       ) : (
         <p className="pt-40 text-3xl font-semibold">No more users</p>

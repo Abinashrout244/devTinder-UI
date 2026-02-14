@@ -38,8 +38,8 @@ const EditProfile = ({ user }) => {
   };
 
   return (
-    <div className="card bg-base-300 w-full max-w-5xl mx-auto p-6 ">
-      <div className="flex flex-col lg:flex-row gap-8 items-stretch">
+    <div className="card bg-base-300 w-full max-w-5xl mx-auto p-6  ">
+      <div className="flex flex-col lg:flex-row gap-8 items-stretch ">
         <div className="flex-1">
           <h2 className="card-title justify-center mb-6 text-xl">
             Edit Profile
@@ -129,6 +129,7 @@ const EditProfile = ({ user }) => {
         <div className="flex-1 flex justify-center items-center">
           <FeedCard
             user={{ firstName, lastName, age, gender, about, photoURL }}
+            enableSwipe={false}
           />
         </div>
       </div>

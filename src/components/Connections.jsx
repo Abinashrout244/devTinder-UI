@@ -3,6 +3,7 @@ import React, { useEffect } from "react";
 import { BASE_URL } from "../utils/Constants";
 import { useDispatch, useSelector } from "react-redux";
 import { addConnections } from "../utils/connectionSlice";
+import spinner from "../assets/spinner.gif";
 
 const Connections = () => {
   const connection_data = useSelector((state) => state.connection);
@@ -24,7 +25,12 @@ const Connections = () => {
   useEffect(() => {
     fetc_Connections();
   }, []);
-  if (!connection_data) return;
+  if (!connection_data)
+    return (
+      <h1 className="h-screen flex justify-center items-center">
+        <img src={spinner} className="size-16" />
+      </h1>
+    );
   if (connection_data.length === 0)
     return (
       <div className="min-h-screen flex items-center justify-center px-4">

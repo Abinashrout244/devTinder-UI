@@ -75,7 +75,7 @@ import { motion, useMotionValue, useTransform } from "framer-motion";
 //     )
 //   );
 // };
-const FeedCard = ({ user }) => {
+const FeedCard = ({ user, enableSwipe = true }) => {
   const { firstName, about, photoURL, age, gender, _id } = user;
   const dispatch = useDispatch();
 
@@ -96,6 +96,7 @@ const FeedCard = ({ user }) => {
   };
 
   const handleDragEnd = (event, info) => {
+    if (!enableSwipe) return;
     if (info.offset.x > 150) {
       fetch_feed("intrested", _id); // RIGHT SWIPE
     } else if (info.offset.x < -150) {
@@ -108,7 +109,7 @@ const FeedCard = ({ user }) => {
   return (
     <motion.div
       style={{ x, rotate }}
-      drag="x"
+      drag={enableSwipe ? "x" : false}
       dragConstraints={{ left: 0, right: 0 }}
       onDragEnd={handleDragEnd}
       whileDrag={{ scale: 1.05 }}

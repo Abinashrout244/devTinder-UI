@@ -3,6 +3,7 @@ import React, { useEffect } from "react";
 import { BASE_URL } from "../utils/Constants";
 import { useDispatch, useSelector } from "react-redux";
 import { addRequest, removeRequest } from "../utils/requestSlice";
+import spinner from "../assets/spinner.gif";
 
 const ConnectionRequests = () => {
   const dispatch = useDispatch();
@@ -36,10 +37,15 @@ const ConnectionRequests = () => {
   const request_data = useSelector((state) => state.request);
   //console.log(request_data);
 
-  if (!request_data) return;
+  if (!request_data)
+    return (
+      <h1 className="h-screen flex justify-center items-center">
+        <img src={spinner} className="size-16" />
+      </h1>
+    );
   if (request_data.length === 0) {
     return (
-      <div className="min-h-screen flex flex-col justify-center items-center text-center px-4">
+      <div className="min-h-screen flex flex-col justify-center items-center text-center px-4 z-20">
         <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold bg-linear-to-r from-primary to-secondary bg-clip-text text-transparent animate-pulse">
           No Pending Requests Found!!
         </h1>
