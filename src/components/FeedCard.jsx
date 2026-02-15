@@ -3,6 +3,7 @@ import React from "react";
 import { BASE_URL } from "../utils/Constants";
 import { removeFeed } from "../utils/feedSlice";
 import { useDispatch } from "react-redux";
+import { useState } from "react";
 //import { motion } from "motion/react";
 import { motion, useMotionValue, useTransform } from "framer-motion";
 
@@ -81,6 +82,7 @@ const FeedCard = ({ user, enableSwipe = true }) => {
 
   const x = useMotionValue(0);
   const rotate = useTransform(x, [-200, 200], [-20, 20]);
+  const [exitX, setExitX] = useState(0);
 
   const fetch_feed = async (status, userId) => {
     try {
@@ -99,7 +101,9 @@ const FeedCard = ({ user, enableSwipe = true }) => {
     if (!enableSwipe) return;
     if (info.offset.x > 150) {
       fetch_feed("intrested", _id); // RIGHT SWIPE
+      setExitX(400);
     } else if (info.offset.x < -150) {
+      setExitX(-400);
       fetch_feed("ignored", _id); // LEFT SWIPE
     }
   };
@@ -115,7 +119,7 @@ const FeedCard = ({ user, enableSwipe = true }) => {
       whileDrag={{ scale: 1.05 }}
       initial={{ opacity: 0, scale: 0.9 }}
       animate={{ opacity: 1, scale: 1 }}
-      exit={{ opacity: 0, x: 400 }}
+      exit={{ opacity: 0, x: exitX }}
       transition={{ duration: 0.3 }}
       className="card bg-slate-800 w-72 rounded-2xl shadow-xl cursor-grab active:cursor-grabbing"
     >

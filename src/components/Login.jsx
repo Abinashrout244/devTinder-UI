@@ -23,7 +23,7 @@ const Login = () => {
   const handleLogin = async () => {
     try {
       const res = await axios.post(
-        `${BASE_URL}/login`,
+        `${BASE_URL}/api/auth/login`,
         {
           emailId,
           password,
@@ -43,13 +43,14 @@ const Login = () => {
   const handleSignup = async () => {
     try {
       const res = await axios.post(
-        `${BASE_URL}/signup`,
+        `${BASE_URL}/api/auth/signup`,
         { firstName, lastName, emailId, password },
         { withCredentials: true },
       );
       console.log(res.data.user);
       dispatch(addUser(res?.data?.user));
       toast.success("User Register Sucessfully!!");
+
       navigate("/");
     } catch (err) {
       setErr(err?.response?.data);

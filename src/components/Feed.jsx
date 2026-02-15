@@ -6,10 +6,13 @@ import { addFeed } from "../utils/feedSlice";
 import FeedCard from "./FeedCard";
 import { AnimatePresence } from "framer-motion";
 import spinner from "../assets/spinner.gif";
+import { useNavigate } from "react-router-dom";
 
 const Feed = () => {
   const dispatch = useDispatch();
-
+  const user = useSelector((state) => state.user);
+  const data = useSelector((data) => data.Feed);
+  const navigate = useNavigate();
   const handleFeed = async () => {
     try {
       const feed_data = await axios.get(`${BASE_URL}/user/feed`, {
@@ -23,9 +26,17 @@ const Feed = () => {
   };
 
   useEffect(() => {
-    handleFeed();
-  }, []);
-  const data = useSelector((data) => data.Feed);
+    if (user) {
+      handleFeed();
+    }
+  }, [user]);
+  if (!user) {
+    navigate("/login");
+    return;
+  }
+
+  if (!user) return null;
+
   if (!data)
     return (
       <h1 className="h-screen flex justify-center items-center">
