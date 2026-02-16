@@ -4,7 +4,7 @@ import Feed from "./components/Feed";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Provider } from "react-redux";
 import appStore from "./utils/appStore";
-import Signup from "./components/Signup";
+
 import Profile from "./components/Profile";
 import Error from "./utils/Error";
 import Connections from "./components/Connections";
@@ -22,7 +22,7 @@ function App() {
             <Route path="/" element={<Body />}>
               <Route index element={<Feed />} />
               <Route path="/login" element={<Login />} />
-              <Route path="/signup" element={<Signup />} />
+
               <Route path="/profile" element={<Profile />} />
               <Route path="/connections" element={<Connections />} />
               <Route path="/requests" element={<ConnectionRequests />} />
