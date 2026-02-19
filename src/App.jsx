@@ -21,12 +21,12 @@ function App() {
           <Routes>
             <Route path="/" element={<Body />}>
               <Route index element={<Feed />} />
-              <Route path="/login" element={<Login />} />
+              <Route path="login" element={<Login />} />
 
-              <Route path="/profile" element={<Profile />} />
-              <Route path="/connections" element={<Connections />} />
-              <Route path="/requests" element={<ConnectionRequests />} />
-              <Route path="/changepassword" element={<ForgetPassword />} />
+              <Route path="profile" element={<Profile />} />
+              <Route path="connections" element={<Connections />} />
+              <Route path="requests" element={<ConnectionRequests />} />
+              <Route path="changepassword" element={<ForgetPassword />} />
             </Route>
             <Route path="*" element={<Error />} />
           </Routes>
